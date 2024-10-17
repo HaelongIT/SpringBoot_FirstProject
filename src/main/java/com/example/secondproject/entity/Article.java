@@ -5,12 +5,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @AllArgsConstructor         // 생성자를 대신하는 어노테이션
 @ToString                   // toString() 메서드를 대신하는 어노테이션
 @NoArgsConstructor          // 기본 생성자를 추가하는 어노테이션(jpa의 엔티티에는 기본 생성자가 필수)
+@Getter                     // GetId() 메서드를 대신하는 어노테이션
 @Entity
 public class Article {
     @Id
@@ -20,6 +22,10 @@ public class Article {
     private String title;
     @Column
     private String content;
+
+    // getId 메서드 정의
+//    public Long getId() {
+//    }
 
     // Article 생성자 추가
 //    public Article(Long id, String title, String content) {
