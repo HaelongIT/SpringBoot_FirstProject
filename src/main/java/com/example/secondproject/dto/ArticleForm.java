@@ -7,6 +7,7 @@ import lombok.ToString;
 @AllArgsConstructor     // 생성자 만들어주는 어노테이션
 @ToString               // toString() 메서드를 대신하는 어노테이션
 public class ArticleForm {
+    private Long id;
     private String title;
     private String content;
 
@@ -27,6 +28,6 @@ public class ArticleForm {
 
     // dto를 엔티티로 바꿔줄 메서드 추가
     public Article toEntity() {
-        return new Article(null, title, content);
+        return new Article(id, title, content);
     }
 }

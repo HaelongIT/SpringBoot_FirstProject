@@ -38,7 +38,8 @@ public class ArticleController {
         Article saved = articleRepository.save(article);
         // System.out.println(saved.toString());       // entity가 db로 저장된거 확인
         log.info(saved.toString());
-        return "redirect:/articles/" + saved.getId();
+        // return "/articles/show";                     // 일반 반환으로는 show로 연결 불가능
+        return "redirect:/articles/" + saved.getId();      // 리다이렉트를 통해서 show로 연결 가능
     }
 
     @GetMapping("/articles/{id}")
@@ -61,5 +62,32 @@ public class ArticleController {
         model.addAttribute("articleList", articleEntityList);
         // 뷰 페이지 설정하기
         return "articles/index";
+    }
+
+    @GetMapping("/articles/{id}/edit")
+    public String edit(@PathVariable Long id, Model model) {
+        log.info("id = " + id);
+        // 리파지터리에서 해당 데이터 찾아오기
+        Article articleEntity = articleRepository.findById(id).orElse(null);
+        // 엔티티를 모델로 등록
+        model.addAttribute("article", articleEntity);
+        // 수정 페이지에 해당 데이터를 보여줘야 함
+        return "articles/edit";
+    }
+
+    @PostMapping("/articles/update")
+    public String update(ArticleForm form) {
+        log.info(form.toString());          // 수정 데이터 dto로 받은 것 확인
+        // DTO를 엔티티로 변환
+        Article article = form.toEntity();
+        log.info(article.toString());       // 엔티티로 변환된 것 확인
+        // 리파지터리로 엔티티를 db에 저장
+        Article target = articleRepository.findById(article.getId()).orElse(null);
+        if (target != null) {
+            Article saved = articleRepository.save(article);
+            log.info(saved.toString());
+        }
+        // 뷰 페이지 설정(수정된 <글 상세페이지>로 연결)
+        return "redirect:/articles/" + article.getId();
     }
 }
