@@ -22,10 +22,10 @@ public class Article {
     private String content;
 
     public Article patch(Article articleEntity) {
-        if (articleEntity.title != null) {
-            this.title = articleEntity.title;
+        if (articleEntity.title != null) {      // 수정할 데이터에 title이 존재할 경우만 덮어쓰기
+            this.title = articleEntity.title;   // 기존 타이틀에서 수정 타이틀로 변경
         }
-        if (articleEntity.content != null) {
+        if (articleEntity.content != null) {       // 수정할 데이터에 content가 있을 경우에만 덮어쓰기
             this.content = articleEntity.content;
         }
         return this;
