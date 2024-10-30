@@ -24,9 +24,21 @@ public class Comment {
     @Column
     private String body;
 
-    public static Comment toEntity(Article article, CommentDto commentDto) {
-        // 예외 발생
-
+    public static Comment toEntity(Article parentArticle, CommentDto commentDto) {
+        // 예외 발생(2가지 경우)
+        if (commentDto.getId() != null) {
+            throw new IllegalArgumentException("댓글 생성 실패! 댓글의 id가 있으면 안됩니다.");
+        }
+        if (commentDto.getArticleId() != parentArticle.getId()) {
+            throw new IllegalArgumentException("댓글 생성 실패! 게시글의 id가 잘못됐습니다.");
+        }
         // 엔티티 생성 및 변환
+        Comment changedComment = new Comment(
+                commentDto.getId(),
+                parentArticle,
+                commentDto.getNickname(),
+                commentDto.getBody()
+        );
+        return changedComment;
     }
 }
