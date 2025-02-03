@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/mainLayout}">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>환영합니다</title>
+</head>
+<body>
+    <div layout:fragment="content">
+<!--        <h1 th:text="${username}">용재님, 반갑습니다.</h1>-->
+        <h1><span th:text="${username}">용재</span>님, 반갑습니다.</h1>
+    </div>
+</body>
+</html>
