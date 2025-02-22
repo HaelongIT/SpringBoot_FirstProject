@@ -38,16 +38,16 @@ public class CommentApiController {
     }
 
     // TODO : UPDATE
-//    @PatchMapping("/comments/{id}")
-//    public ResponseEntity<CommentDto> updateComment(@PathVariable Long id) {
-//        // TODO : 서비스에 위임
-//        CommentDto updatedDto = commentService.editComment(id);
-//
-//        // TODO : 반환
-//        return updatedDto != null
-//                ? ResponseEntity.ok(updatedDto)
-//                : ResponseEntity.badRequest().build();
-//    }
+    @PatchMapping("/comments/{id}")
+    public ResponseEntity<CommentDto> updateComment(@RequestBody CommentDto commentDto, @PathVariable Long id) {
+        // TODO : 서비스에 위임
+        CommentDto updatedDto = commentService.editComment(commentDto, id);
+
+        // TODO : 반환
+        return updatedDto != null
+                ? ResponseEntity.ok(updatedDto)
+                : ResponseEntity.badRequest().build();
+    }
 
     // TODO : DELETE
 

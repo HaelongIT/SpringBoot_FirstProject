@@ -35,4 +35,12 @@ public class CommentEntity {
     }
 
     // TODO : DTO를 매개변수로 받아서, 엔티티를 수정하는 메서드
+    public void updateFromDto(CommentDto dto) {
+        if (dto.getNickname() != null) {
+            this.nickname = dto.getNickname();
+        }
+        if (dto.getBody() != null) {
+            this.body = dto.getBody();
+        }
+    }
 }

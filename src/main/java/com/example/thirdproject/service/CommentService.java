@@ -55,9 +55,27 @@ public class CommentService {
     }
 
     // TODO : UPDATE
-//    public CommentDto editComment(Long id) {
-//
-//    }
+    public CommentDto editComment(CommentDto commentDto, Long id) {
+        // TODO : 1. 서비스 계층에서 DB에 id에 해당되는 게시글의 댓글 조회하기
+        CommentEntity target = commentRepository.findById(id).orElse(null);
+
+        // TODO : 2. 비어있는 댓글이 아닌지 유효성 검증하고, 예외 발생시키기
+        if (target == null) {
+            throw new EntityNotFoundException("댓글이 존재하지 않습니다.");
+        }
+
+        // TODO : 3. DB에서 가져온 댓글 엔티티를 수정할 댓글 데이터인 DTO를 사용해서, 수정하기
+        target.updateFromDto(commentDto);
+
+        // TODO : 4. 서비스 계층에서 DB에 수정할 댓글을 저장하기
+        CommentEntity savedEntity = commentRepository.save(target);
+
+        // TODO : 5. 서비스 계층에서 댓글 수정하고 반환받은 엔티티를 DTO로 변환
+        CommentDto returnComment = CommentDto.createCommentDto(savedEntity);
+
+        // TODO : 6. 답으로 수정한 댓글 데이터 반환
+        return returnComment;
+    }
 
     // TODO : DELETE
 }
