@@ -78,4 +78,18 @@ public class CommentService {
     }
 
     // TODO : DELETE
+    public void removeComment(Long id) {
+        // TODO : 1. 서비스 계층에서 DB에 id에 해당되는 게시글의 댓글 조회하기
+        CommentEntity target = commentRepository.findById(id).orElse(null);
+
+        // TODO : 2. 비어있는 댓글이 아닌지 유효성 검증하고, 예외 발생시키기
+        if (target == null) {
+            throw new EntityNotFoundException("댓글이 존재하지 않습니다.");
+        }
+
+        // TODO : 3. 서비스 계층에서 DB에서 삭제할 댓글 삭제하기
+        commentRepository.delete(target);
+
+        // TODO : 4. 응답으로 void 반환
+    }
 }

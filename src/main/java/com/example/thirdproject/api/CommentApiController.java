@@ -50,5 +50,12 @@ public class CommentApiController {
     }
 
     // TODO : DELETE
+    @DeleteMapping("/comments/{id}")
+    public ResponseEntity<Void> deleteComment(@PathVariable Long id) {
+        // TODO : 서비스에 위임
+        commentService.removeComment(id);
 
+        // TODO : 반환
+        return ResponseEntity.noContent().build();
+    }
 }
