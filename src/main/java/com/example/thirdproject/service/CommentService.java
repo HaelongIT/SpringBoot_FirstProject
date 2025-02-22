@@ -9,6 +9,7 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -39,8 +40,24 @@ public class CommentService {
     }
 
     // TODO : READ
+    public List<CommentDto> getCommentsByArticleId(Long articleId) {
+        // TODO : 1. 서비스 계층에서 DB에서 articleId에 해당되는 게시글의 모든 댓글 데이터 묶음을 조회
+        List<CommentEntity> searchedComments = commentRepository.findCommentEntitiesByArticleId(articleId);
+
+        // TODO : 2. 서비스 계층에서 댓글 엔티티를, 댓글 DTO로 변환
+        List<CommentDto> returnComments = new ArrayList<>();
+        for (CommentEntity comment : searchedComments) {
+            returnComments.add(CommentDto.createCommentDto(comment));
+        }
+
+        // TODO : 3. 서비스 계층에서 응답으로 조회한 댓글 데이터 묶음 반환
+        return returnComments;
+    }
 
     // TODO : UPDATE
+//    public CommentDto editComment(Long id) {
+//
+//    }
 
     // TODO : DELETE
 }

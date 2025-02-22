@@ -26,10 +26,28 @@ public class CommentApiController {
     }
 
     // TODO : READ
-//    @GetMapping("/articles/{articleId}/comments")
-//    public ResponseEntity<List<CommentDto>> readComments(@PathVariable Long articleId)
+    @GetMapping("/articles/{articleId}/comments")
+    public ResponseEntity<List<CommentDto>> readComments(@PathVariable Long articleId) {
+        // TODO : 서비스에 위임
+        List<CommentDto> readDtos = commentService.getCommentsByArticleId(articleId);
+
+        // TODO : 반환
+        return readDtos != null
+                ? ResponseEntity.ok(readDtos)
+                : ResponseEntity.badRequest().build();
+    }
 
     // TODO : UPDATE
+//    @PatchMapping("/comments/{id}")
+//    public ResponseEntity<CommentDto> updateComment(@PathVariable Long id) {
+//        // TODO : 서비스에 위임
+//        CommentDto updatedDto = commentService.editComment(id);
+//
+//        // TODO : 반환
+//        return updatedDto != null
+//                ? ResponseEntity.ok(updatedDto)
+//                : ResponseEntity.badRequest().build();
+//    }
 
     // TODO : DELETE
 
