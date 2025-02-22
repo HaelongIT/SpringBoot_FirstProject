@@ -30,8 +30,8 @@ public class CommentEntity {
     private String body;
 
     // TODO : DTO -> 엔티티로 변환하는 메서드
-    public static CommentEntity createCommentEntity(CommentDto dto) {
-        return new CommentEntity(null, dto.getArticle(), dto.getNickname(), dto.getBody());
+    public static CommentEntity createCommentEntity(CommentDto dto, ArticleEntity article) {
+        return new CommentEntity(null, article, dto.getNickname(), dto.getBody());
     }
 
     // TODO : DTO를 매개변수로 받아서, 엔티티를 수정하는 메서드

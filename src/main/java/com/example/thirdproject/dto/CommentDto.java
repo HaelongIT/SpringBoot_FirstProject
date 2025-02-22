@@ -12,12 +12,11 @@ import lombok.ToString;
 @Getter
 @ToString
 public class CommentDto {
-    private ArticleEntity article;
     private String nickname;
     private String body;
 
     // TODO : 엔티티 -> DTO로 변환하는 메서드
     public static CommentDto createCommentDto(CommentEntity entity) {
-        return new CommentDto(entity.getArticle(), entity.getNickname(), entity.getBody());
+        return new CommentDto(entity.getNickname(), entity.getBody());
     }
 }
